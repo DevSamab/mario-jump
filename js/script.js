@@ -1,13 +1,26 @@
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
+const scoreCounter = document.querySelector('.score-counter');
+
+let score = 0;
+let canIncrementScore = true;
 
 const jump = () => {
-    mario.classList.add("jump");
-    
-    setTimeout(() => {
-        mario.classList.remove("jump");
-    }, 500);
-}
+    if(!mario.classList.contains('jump')) {    
+        mario.classList.add("jump");
+        
+        setTimeout(() => {
+            mario.classList.remove("jump");
+        }, 500);
+    }
+};
+
+const incrementScore = () => {
+    if (canIncrementScore) {
+      score++;
+      scoreCounter.textContent = score;
+    }
+  };
 
 const loop = setInterval(() => {
 
@@ -26,10 +39,13 @@ const loop = setInterval(() => {
         mario.style.width = '75px';
         mario.style.marginLeft = '50px';
 
+        canIncrementScore = false;
         clearInterval(loop);
-
+    } else if (pipePosition === 0) {
+        canIncrementScore = true;
     }
 
 }, 10); 
 
 document.addEventListener("keydown", jump);
+pipe.addEventListener('animationiteration', incrementScore);
