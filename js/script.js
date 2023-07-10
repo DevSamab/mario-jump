@@ -5,6 +5,8 @@ const scoreCounter = document.querySelector('.score-counter');
 let score = 0;
 let canIncrementScore = true;
 
+scoreCounter.textContent = 'Pontuação: 0'
+
 const jump = () => {
     if(!mario.classList.contains('jump')) {    
         mario.classList.add("jump");
@@ -18,7 +20,7 @@ const jump = () => {
 const incrementScore = () => {
     if (canIncrementScore) {
       score++;
-      scoreCounter.textContent = score;
+      scoreCounter.textContent = `Pontuação: ${score}`;
     }
   };
 
